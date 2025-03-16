@@ -18,19 +18,30 @@ export class OpenAIProvider implements AIProvider {
     this.logger.log(`Generating code for: ${prefix} ... ${suffix}`);
     const url = `${process.env.OPENAI_API_URL}/v1/chat/completions`;
     const data = {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4-turbo',
       messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: `${prefix} ... ${suffix}` },
+        {
+          role: 'system',
+          content:
+            'You are an AI assistant for code completion. ' +
+            'Return only the missing code that fits between the given prefix and suffix. ' +
+            'Do not repeat the prefix or suffix in your response.',
+        },
+        {
+          role: 'user',
+          content: `Complete the code between the following:\n\nPrefix:\n${prefix}\n\nSuffix:\n${suffix}\n\nOnly return the missing code.`,
+        },
       ],
       max_tokens: 100,
-      temperature: 0.7,
+      temperature: 0.2,
     };
+
     const headers = {
       Authorization: `Bearer ${this.apiKey}`,
       'Content-Type': 'application/json',
     };
+
     const response = await makeRequest(url, data, headers);
-    return response.choices[0].text.trim();
+    return response.choices[0].message.content.trim();
   }
 }

@@ -1,6 +1,7 @@
 import { LoggerServiceImplementation } from '../logger/logger.service';
 import { OpenAIProvider } from './providers/openai-provider';
-import { OllamaProvider } from './providers/ollama-provider';
+import { CodellamaProvider } from './providers/codellama-provider';
+import { CodegemmaProvider } from './providers/codegemma-privoder';
 import { AIProvider } from './ai-provider.interface';
 
 export function createAIProvider(
@@ -11,9 +12,9 @@ export function createAIProvider(
     [key: string]: new (logger: LoggerServiceImplementation) => AIProvider;
   } = {
     openai: OpenAIProvider,
-    codellama: OllamaProvider,
-    codegemma: OllamaProvider,
-    codestral: OllamaProvider,
+    codellama: CodellamaProvider,
+    codegemma: CodegemmaProvider,
+    // codestral: CodellamaProvider,
   };
 
   const ProviderClass = providersMap[providerName];
