@@ -3,7 +3,7 @@ import { AiCompletionService } from './ai-completion.service';
 import { LoggerServiceImplementation } from '../logger/logger.service';
 
 @Controller('autocomplete')
-export class AutocompleteController {
+export class AICompletionController {
   constructor(
     private readonly aiCompletionService: AiCompletionService,
     private readonly loggerService: LoggerServiceImplementation,
