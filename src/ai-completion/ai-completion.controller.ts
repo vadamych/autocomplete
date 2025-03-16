@@ -2,7 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { AiCompletionService } from './ai-completion.service';
 import { LoggerServiceImplementation } from '../logger/logger.service';
 
-@Controller('autocomplete')
+@Controller('ai-completion')
 export class AICompletionController {
   constructor(
     private readonly aiCompletionService: AiCompletionService,
